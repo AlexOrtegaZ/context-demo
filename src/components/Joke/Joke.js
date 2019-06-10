@@ -2,10 +2,10 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import styles from "./styles";
-import Categories from "../Categories";
 import notFunnyImage from "../../images/notFunny.png";
 import funnyImage from "../../images/funny.jpg";
 import queryString from "query-string";
+import { CategoriesProvider } from '../CategoriesContext';
 
 const Joke = () => {
   const [joke, setJoke] = React.useState(null);
@@ -33,7 +33,7 @@ const Joke = () => {
       <div className="newJokeBtn">
         <button onClick={fetchNewJoke}>Fetch it you coward!</button>
       </div>
-      <Categories category={category} setCategory={setCategory} />
+      <CategoriesProvider category={category} setCategory={setCategory} />
       <div className="joke">
         {loading ? (
           <span role="img" aria-label="waiting">

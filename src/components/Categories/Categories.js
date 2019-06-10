@@ -1,33 +1,25 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
-import classNames from "classnames";
-import styles from "./styles";
+import React from 'react';
+import "./styles.css";
+import Category from "./Category/Category";
+import withCategoriesHOC from "../WithCategoryHOC";
 
-function Categories({ setCategory, category }) {
+function Categories({ categories, fetchCategories }) {
+  
+  React.useEffect(() => {
+    fetchCategories();
+    // eslint-disable-next-line
+  }, []);
   return (
-    <div css={styles}>
+    <div>
       <ul>
-        <li
-          className={classNames({ selected: category === "dev" })}
-          onClick={() => setCategory("dev")}
-        >
-          dev
-        </li>
-        <li
-          className={classNames({ selected: category === "career" })}
-          onClick={() => setCategory("career")}
-        >
-          career
-        </li>
-        <li
-          className={classNames({ selected: category === "science" })}
-          onClick={() => setCategory("science")}
-        >
-          science
-        </li>
+        {
+          categories.map(category => (
+            <Category category={category} />
+          ))
+        }
       </ul>
     </div>
   );
 }
 
-export default Categories;
+export default withCategoriesHOC(Categories);
